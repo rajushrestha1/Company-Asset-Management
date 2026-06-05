@@ -11,9 +11,14 @@ const userRoutes = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
+
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://company-asset-management.vercel.app",
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -22,8 +27,5 @@ app.use("/api/transactions", transactionRoutes);
 app.use("/api/users", userRoutes);
 
 app.use(errorHandler);
-
-const PORT = process.env.PORT || 3000;
-
 
 module.exports = app;
