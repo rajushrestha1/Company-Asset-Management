@@ -44,4 +44,6 @@ const getMe = async (req, res) => {
   res.json(req.user);
 };
 
+// test vercell deploy
+
 module.exports = { register, login, getMe };
