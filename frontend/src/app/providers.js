@@ -8,19 +8,20 @@ export function Providers({ children }) {
     <AuthProvider>
       {children}
       <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: "#111120",
-            color: "#f0f0ff",
-            border: "1px solid #1c1c2e",
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: "14px",
-          },
-          success: { iconTheme: { primary: "#22c988", secondary: "#0b0b13" } },
-          error: { iconTheme: { primary: "#ff5fa5", secondary: "#0b0b13" } },
-        }}
-      />
+  position="top-right"
+  toastOptions={{
+    className:
+      "!bg-slate-900/80 !backdrop-blur-md !text-white !border !border-white/10 !shadow-xl",
+    success: {
+      className:
+        "!bg-emerald-500/20 !backdrop-blur-md !text-emerald-100 !border !border-emerald-500/30",
+    },
+    error: {
+      className:
+        "!bg-rose-500/20 !backdrop-blur-md !text-rose-100 !border !border-rose-500/30",
+    },
+  }}
+/>
     </AuthProvider>
   );
 }
