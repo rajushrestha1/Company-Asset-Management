@@ -11,19 +11,9 @@ const userRoutes = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
-
 connectDB();
 
-const corsOptions = {
-  origin: "https://company-asset-management.vercel.app",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -33,4 +23,5 @@ app.use("/api/users", userRoutes);
 
 app.use(errorHandler);
 
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
