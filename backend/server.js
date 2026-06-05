@@ -14,10 +14,15 @@ const app = express();
 
 connectDB();
 
-app.use(cors({
+const corsOptions = {
   origin: "https://company-asset-management.vercel.app",
-  credentials: true
-}));
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
