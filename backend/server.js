@@ -19,13 +19,15 @@ const allowedOrigins = [
   "https://company-asset-management-backend.vercel.app",
 ];
 
+// Manual CORS handler for Vercel preflight requests
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
-  if (allowedOrigins.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
 
+  res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -33,11 +35,11 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Content-Type,Authorization"
+    "Content-Type,Authorization,X-Requested-With"
   );
 
   if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
+    return res.status(200).end();
   }
 
   next();
@@ -45,20 +47,42 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   })
 );
 
 app.use(express.json());
 
 // Connect DB after CORS
-connectDB();
+connectDB()
+  .then(() => console.log("MongoDB connected"))
+  .catch((error) => {
+    console.error("MongoDB connection failed:", error.message);
+  });
 
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     message: "Company Asset Management Backend API is running",
+    origin: req.headers.origin || null,
+  });
+});
+
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "API health check passed",
   });
 });
 
@@ -75,6 +99,14 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
   console.error("Server Error:", err.message);
 
   res.status(err.status || 500).json({
