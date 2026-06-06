@@ -13,38 +13,13 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 
-function StatCard({ label, value, icon: Icon, color }) {
-  const colors = {
-    violet: {
-      bg: "bg-violet-500/10",
-      text: "text-violet-300",
-      border: "border-violet-500/20",
-    },
-    green: {
-      bg: "bg-emerald-500/10",
-      text: "text-emerald-300",
-      border: "border-emerald-500/20",
-    },
-    pink: {
-      bg: "bg-pink-500/10",
-      text: "text-pink-300",
-      border: "border-pink-500/20",
-    },
-    amber: {
-      bg: "bg-amber-500/10",
-      text: "text-amber-300",
-      border: "border-amber-500/20",
-    },
-  };
-
-  const c = colors[color] || colors.violet;
-
+function StatCard({ label, value, icon: Icon, iconClassName }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl shadow-black/20 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:bg-slate-800/80">
+    <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-[#192140] p-5 shadow-xl shadow-black/20 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:bg-slate-800/80">
       <div
-        className={`absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl border ${c.border} ${c.bg}`}
+        className={`absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl border ${iconClassName}`}
       >
-        <Icon size={20} className={c.text} />
+        <Icon size={20} />
       </div>
 
       <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
@@ -72,10 +47,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      assetAPI.getStats(),
-      txnAPI.getAll({ status: "active" }),
-    ])
+    Promise.all([assetAPI.getStats(), txnAPI.getAll({ status: "active" })])
       .then(([statsRes, txnsRes]) => {
         setStats(statsRes.data);
         setTxns(txnsRes.data.slice(0, 8));
@@ -92,7 +64,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 p-4 text-slate-200 sm:p-6 lg:p-8">
+    <main className="min-h-screen bg-slate-950 p-4 text-slate-200 sm:p-6 lg:p-8">
       <div className="mx-auto w-full max-w-7xl">
         {/* Header */}
         <div className="mb-8 flex flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl shadow-black/20 sm:flex-row sm:items-center sm:justify-between">
@@ -114,7 +86,7 @@ export default function AdminDashboard() {
 
           <Link
             href="/admin/assets"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-600 to-violet-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-violet-950/40 transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 active:translate-y-0"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-violet-950/40 transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 active:translate-y-0"
           >
             <Plus size={17} />
             Add Asset
@@ -127,33 +99,33 @@ export default function AdminDashboard() {
             label="Total Assets"
             value={stats?.total}
             icon={Package}
-            color="violet"
+            iconClassName="border-violet-500/20 bg-violet-500/10 text-violet-300"
           />
 
           <StatCard
             label="Available"
             value={stats?.available}
             icon={CheckSquare}
-            color="green"
+            iconClassName="border-emerald-500/20 bg-emerald-500/10 text-emerald-300"
           />
 
           <StatCard
             label="Checked Out"
             value={stats?.checkedOut}
             icon={Users}
-            color="pink"
+            iconClassName="border-pink-500/20 bg-pink-500/10 text-pink-300"
           />
 
           <StatCard
             label="Reserved"
             value={stats?.reserved}
             icon={Clock}
-            color="amber"
+            iconClassName="border-amber-500/20 bg-amber-500/10 text-amber-300"
           />
         </div>
 
         {/* Active Checkouts */}
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl shadow-black/20">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#192140] shadow-xl shadow-black/20">
           <div className="flex flex-col gap-3 border-b border-slate-800 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-lg font-bold text-white">
@@ -271,6 +243,6 @@ export default function AdminDashboard() {
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

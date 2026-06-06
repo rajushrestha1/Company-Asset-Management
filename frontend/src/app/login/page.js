@@ -42,26 +42,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-slate-950">
+    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-[#192140]">
 
-      {/* background effects */}
-      <div className="absolute top-0 left-1/4 w-80 h-80 bg-violet-600/20 blur-3xl rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-pink-600/10 blur-3xl rounded-full pointer-events-none" />
-
+     
       <div className="relative w-full max-w-md">
 
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center">
-             
-            </div>
-
-            <span className="font-bold text-2xl text-white">
-              AssetFlow
-            </span>
-          </Link>
+        <div className="text-center mb-8 justify-center items-center">
+          <Link href="/" className="flex h-16 items-center justify-center">
+  <img
+    src="/ASSET_MANAGEMENT.png"
+    alt="AssetFlow"
+    className="h-50 w-50  "
+  />
+</Link>
 
           <p className="text-sm mt-2 text-slate-400">
             Sign in to your account

@@ -35,38 +35,31 @@ export default function AdminLayout({ children }) {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950">
+      <div className="min-h-screen flex items-center justify-center bg-[#192140]">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-700 border-t-pink-500" />
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100">
+    <div className="flex min-h-screen bg-[#192140] text-slate-100">
       {/* Sidebar */}
       <aside className="w-64 flex-shrink-0 border-r border-slate-800 bg-slate-900/95 flex flex-col">
         {/* Logo */}
         <div className="px-5 py-5 border-b border-slate-800">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center shadow-lg shadow-pink-950/30">
-              <Zap size={16} className="text-white" />
-            </div>
-
-            <div>
-              <span className="block text-lg font-extrabold tracking-tight text-white">
-                AssetFlow
-              </span>
-              <span className="block text-xs text-slate-400">
-                Admin Panel
-              </span>
-            </div>
+           <Link href="/" className="flex h-16 items-center justify-center">
+            <img
+              src="/ASSET_MANAGEMENT.png"
+              alt="AssetFlow"
+              className="h-50 w-50  "
+            />
           </Link>
         </div>
 
         {/* User */}
         <div className="px-4 py-4 border-b border-slate-800">
           <div className="flex items-center gap-3 rounded-2xl bg-slate-800/70 px-3 py-3 border border-slate-700/70">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center font-bold text-sm text-white uppercase shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 flex items-center justify-center font-bold text-sm text-white uppercase shrink-0">
               {user.name?.[0] || "A"}
             </div>
 
@@ -90,7 +83,7 @@ export default function AdminLayout({ children }) {
                 href={href}
                 className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
                   active
-                    ? "bg-gradient-to-r from-pink-600 to-violet-600 text-white shadow-lg shadow-violet-950/30"
+                    ? "bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 text-white shadow-lg shadow-violet-950/30"
                     : "text-slate-400 hover:bg-slate-800 hover:text-white"
                 }`}
               >

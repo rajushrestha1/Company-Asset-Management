@@ -3,18 +3,19 @@ const generateToken = require("../utils/generateToken");
 
 // @POST /api/auth/register
 const register = async (req, res) => {
-  const { name, email, password, role, department } = req.body;
+  const { name, email, password, department } = req.body;
+  // role is intentionally excluded — always set to "employee" by schema default
 
   const existing = await User.findOne({ email });
   if (existing) return res.status(400).json({ message: "Email already registered" });
 
-  const user = await User.create({ name, email, password, role, department });
+  const user = await User.create({ name, email, password, department });
 
   res.status(201).json({
     _id: user._id,
     name: user.name,
     email: user.email,
-    role: user.role,
+    role: user.role,       // will always be "employee"
     department: user.department,
     token: generateToken(user._id),
   });
@@ -43,7 +44,5 @@ const login = async (req, res) => {
 const getMe = async (req, res) => {
   res.json(req.user);
 };
-
-// test vercell deploy
 
 module.exports = { register, login, getMe };

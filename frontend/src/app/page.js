@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 import {
   Zap,
@@ -14,28 +15,18 @@ import {
   BarChart3,
 } from "lucide-react";
 
-const primaryBtn =
-  "inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-pink-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-lg hover:scale-105 transition";
-
-const outlineBtn =
-  "inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/40 px-6 py-3 font-semibold text-slate-300 hover:text-white hover:border-slate-500 transition";
-
-const cardClass =
-  "relative rounded-2xl border border-slate-800 bg-slate-900/40 backdrop-blur-sm";
-
 function Feature({ icon: Icon, title, desc }) {
   return (
-    <div className={`${cardClass} group p-6 overflow-hidden`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-pink-500/5 opacity-0 group-hover:opacity-100 transition" />
+    <div className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm transition hover:border-violet-500/40 hover:bg-slate-900">
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-pink-500/5 opacity-0 transition group-hover:opacity-100" />
 
       <div className="relative z-10">
-        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500/20 to-pink-500/10 flex items-center justify-center mb-4">
+        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-pink-500/10">
           <Icon size={20} className="text-violet-400" />
         </div>
 
-        <h3 className="font-bold text-white text-base mb-2">{title}</h3>
-
-        <p className="text-sm text-slate-400 leading-relaxed">{desc}</p>
+        <h3 className="mb-2 text-base font-bold text-white">{title}</h3>
+        <p className="text-sm leading-relaxed text-slate-400">{desc}</p>
       </div>
     </div>
   );
@@ -43,34 +34,38 @@ function Feature({ icon: Icon, title, desc }) {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-
-      {/* NAV */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center">
-              <Zap size={15} className="text-white" />
-            </div>
-            <span className="font-bold text-xl">AssetFlow</span>
-          </div>
-
+    <main className="min-h-screen overflow-hidden bg-[#192140] text-white">
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" className="flex h-16 items-center">
+  <img
+    src="/ASSET_MANAGEMENT.png"
+    alt="AssetFlow"
+    className="h-40 w-auto object-contain"
+  />
+</Link>
           <div className="flex items-center gap-3">
-            <Link href="/login" className={outlineBtn}>
-              Sign In
-            </Link>
-            <Link href="/register" className={primaryBtn}>
-              Get Started
-            </Link>
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="rounded-full border-slate-700 bg-slate-900/60 text-slate-200 hover:bg-violet-500/10 hover:text-white"
+            >
+              <Link href="/login">Sign In</Link>
+            </Button>
+
+            <Button
+              size="sm"
+              asChild
+              className="rounded-full bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 text-white hover:opacity-90"
+            >
+              <Link href="/register">Get Started</Link>
+            </Button>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="relative pt-36 pb-20 px-6">
-        
-        {/* grid background */}
+      <section className="relative px-4 pb-20 pt-36 sm:px-6">
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -80,38 +75,49 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative max-w-3xl mx-auto text-center">
-
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 border border-violet-500/30 bg-violet-500/10">
-            <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+        <div className="relative mx-auto max-w-3xl text-center">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-violet-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-violet-300">
               Company Asset Management
             </span>
           </div>
 
-          <h1 className="font-black text-5xl md:text-6xl leading-tight mb-5">
+          <h1 className="mb-5 text-4xl font-black leading-tight sm:text-5xl md:text-6xl">
             <span>Track every asset.</span>
             <br />
-            <span className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-fuchsia-600 bg-clip-text text-transparent">
               Zero confusion.
             </span>
           </h1>
 
-          <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto">
-            Assign hardware, manage reservation queues, collect condition ratings —
-            all in one place built for IT teams.
+          <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg">
+            Assign hardware, manage reservation queues, collect condition ratings
+            — all in one place built for IT teams.
           </p>
 
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/register" className={primaryBtn}>
-              Get Started Free <ChevronRight size={18} />
-            </Link>
-            <Link href="/login" className={outlineBtn}>
-              Sign In
-            </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              size="lg"
+              asChild
+              className="rounded-full bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 px-8 font-bold text-white hover:opacity-90"
+            >
+              <Link href="/register" className="inline-flex items-center gap-2">
+                Get Started Free <ChevronRight size={18} />
+              </Link>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="rounded-full border-slate-700 bg-slate-900/60 text-slate-200 hover:bg-violet-500/10 hover:text-white"
+            >
+              <Link href="/login">Sign In</Link>
+            </Button>
           </div>
 
-          <div className="flex items-center justify-center gap-6 mt-8 flex-wrap text-sm text-slate-400">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
             {[
               "JWT Secured",
               "Role-based Access",
@@ -127,20 +133,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          
-          <div className="text-center mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">
+      <section className="px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-500">
               Features
             </p>
-            <h2 className="font-black text-4xl">
+            <h2 className="text-3xl font-black sm:text-4xl">
               Everything IT teams need
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Feature
               icon={BarChart3}
               title="Admin Dashboard"
@@ -169,25 +173,23 @@ export default function HomePage() {
             <Feature
               icon={Shield}
               title="Return & Rating"
-              desc="Condition rating system (1–5) for asset lifecycle tracking."
+              desc="Condition rating system 1–5 for asset lifecycle tracking."
             />
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="py-20 px-6 bg-slate-900/40">
-        <div className="max-w-4xl mx-auto text-center">
-
-          <p className="text-xs font-bold uppercase tracking-widest text-violet-400 mb-3">
+      <section className="bg-slate-900/40 px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-violet-400">
             How It Works
           </p>
 
-          <h2 className="font-black text-4xl mb-12">
+          <h2 className="mb-12 text-3xl font-black sm:text-4xl">
             4 steps from setup to return
           </h2>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
             {[
               { n: "1", t: "Register", d: "Admin creates employee accounts." },
               { n: "2", t: "Add Assets", d: "Create assets with metadata." },
@@ -195,56 +197,55 @@ export default function HomePage() {
               { n: "4", t: "Return", d: "Return with condition rating." },
             ].map((s) => (
               <div key={s.n} className="flex flex-col items-center gap-3">
-                
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center font-black">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-pink-600 to-violet-600 font-black text-white">
                   {s.n}
                 </div>
 
-                <h4 className="font-bold">{s.t}</h4>
+                <h4 className="font-bold text-white">{s.t}</h4>
 
-                <p className="text-sm text-slate-400 text-center">
-                  {s.d}
-                </p>
+                <p className="text-center text-sm text-slate-400">{s.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-sm p-12">
-
-            <h2 className="font-black text-3xl mb-4">
+      <section className="px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 p-8 backdrop-blur-sm sm:p-12">
+            <h2 className="mb-4 text-3xl font-black">
               Ready to manage your{" "}
               <span className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
                 hardware inventory?
               </span>
             </h2>
 
-            <p className="text-slate-400 mb-8">
+            <p className="mb-8 text-slate-400">
               Set up your admin account and start managing assets in minutes.
             </p>
 
-            <Link href="/register" className={primaryBtn}>
-              Create Account <ChevronRight size={18} />
-            </Link>
+            <Button
+              size="lg"
+              asChild
+              className="rounded-full bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 px-8 font-bold text-white hover:opacity-90"
+            >
+              <Link href="/register" className="inline-flex items-center gap-2">
+                Create Account <ChevronRight size={18} />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-slate-800 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex justify-between flex-wrap gap-4">
-
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center">
-              <Zap size={13} />
-            </div>
-            <span className="font-bold">AssetFlow</span>
-          </div>
+      <footer className="border-t border-slate-800 px-4 py-8 sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+          <Link href="/" className="flex h-16 items-center">
+  <img
+    src="/ASSET_MANAGEMENT.png"
+    alt="AssetFlow"
+    className="h-50 w-50 object-contain"
+  />
+</Link>
 
           <p className="text-xs text-slate-400">
             Next.js · Express · MongoDB · Cloudinary · JWT
@@ -260,6 +261,6 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }

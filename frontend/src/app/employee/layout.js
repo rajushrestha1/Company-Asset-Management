@@ -50,15 +50,13 @@ export default function EmployeeLayout({ children }) {
       <aside className="flex w-56 shrink-0 flex-col border-r border-white/10 bg-[#111827]">
         {/* Logo */}
         <div className="flex items-center gap-2 border-b border-white/10 px-5 py-5">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#e02d6f] to-[#6c3ef4]">
-              <Zap size={14} className="text-white" />
-            </div>
-
-            <span className="text-lg font-bold tracking-tight">
-              AssetFlow
-            </span>
-          </Link>
+           <Link href="/" className="flex h-16 items-center justify-center">
+  <img
+    src="/ASSET_MANAGEMENT.png"
+    alt="AssetFlow"
+    className="h-50 w-50  "
+  />
+</Link>
         </div>
 
         {/* User Info */}

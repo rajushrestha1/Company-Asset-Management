@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://company-asset-management-backend.vercel.app/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api",
 });
 
 // Attach JWT to every request
