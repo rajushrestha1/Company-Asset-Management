@@ -65,7 +65,71 @@ http://localhost:3000/api/assets/queue/:id
 
 
 
+## System Design
+The system is designed with a clear separation of concerns between the frontend and backend. The frontend is responsible for user interaction, UI rendering, route-based access, and API communication, while the backend manages business logic, authentication, authorization, validation, and database operations.
+JWT-based authentication is used to provide secure and stateless access control across the application. The database schema is structured to manage users, assets, and transactions efficiently, with defined relationships that support asset assignment, return tracking, and transaction history.
+The system also includes validation and centralized error handling to maintain data integrity, prevent invalid operations, and provide a smooth user experience.
 
+┌──────────────────────────────────────────────┐
+│                  USERS                       │
+│                                              │
+│   ┌──────────────┐      ┌──────────────┐    │
+│   │    Admin     │      │   Employee   │    │
+│   │   Browser    │      │   Browser    │    │
+│   └──────┬───────┘      └──────┬───────┘    │
+└──────────┼─────────────────────┼────────────┘
+           │                     │
+           └──────────┬──────────┘
+                      │
+                      ▼
+┌──────────────────────────────────────────────┐
+│              FRONTEND LAYER                  │
+│                                              │
+│            Next.js 14 App Router             │
+│                                              │
+│   /admin/*              /employee/*          │
+└──────────────────────┬───────────────────────┘
+                       │
+                       │ HTTPS / REST API
+                       │ Authorization: Bearer JWT
+                       ▼
+┌──────────────────────────────────────────────┐
+│               BACKEND LAYER                  │
+│                                              │
+│              Node.js + Express.js            │
+│                                              │
+│   ┌────────────┐   ┌────────────────────┐   │
+│   │    CORS    │   │  JWT Auth Middleware│   │
+│   └────────────┘   └────────────────────┘   │
+│                                              │
+│   ┌────────────┐   ┌────────────┐          │
+│   │ /api/auth  │   │ /api/users │          │
+│   └────────────┘   └────────────┘          │
+│                                              │
+│   ┌────────────┐   ┌────────────────┐      │
+│   │ /api/assets│   │ /api/transactions│     │
+│   └────────────┘   └────────────────┘      │
+│                                              │
+│            Controllers / Business Logic      │
+│                     │                        │
+│                     ▼                        │
+│              Mongoose Models                 │
+└─────────────────────┬────────────────────────┘
+                      │
+                      ▼
+┌──────────────────────────────────────────────┐
+│              DATA / SERVICES LAYER           │
+│                                              │
+│   ┌──────────────┐   ┌──────────────┐       │
+│   │ MongoDB Atlas│   │  Cloudinary  │       │
+│   │  Database    │   │ Asset Images │       │
+│   └──────────────┘   └──────────────┘       │
+│                                              │
+│   ┌──────────────┐                          │
+│   │  .env Config │                          │
+│   │ JWT / DB URL │                          │
+│   └──────────────┘                          │
+└──────────────────────────────────────────────┘
 
 ## Backend Setup Instructions
 - cd backend
