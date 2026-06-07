@@ -9,10 +9,8 @@ Asset Management provides a role-based portal where:
 IT Admins can add assets, assign them to employees with a return date, track condition ratings, and manage all users and transactions from a central dashboard.
 Employees can browse the asset catalog, see which devices are available, join a reservation queue for checked-out assets, and return assets with a mandatory condition rating (1–5 stars).
 
-<div style="display: flex; gap: 10px;">
-  <img src="image.png" width="50%" />
-  <img src="image-1.png" width="50%" />
-</div>
+![alt text](image.png)  ![alt text](image-1.png)
+
 ![alt text](image-2.png)
 
 ### Key Features:
@@ -84,3 +82,12 @@ http://localhost:3000/api/assets/queue/:id
 echo "NEXT_PUBLIC_API_URL=http://localhost:3000/api" > .env.local
 npm run dev
 ##### App starts on http://localhost:3001
+
+
+## Backend Overview Images
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
