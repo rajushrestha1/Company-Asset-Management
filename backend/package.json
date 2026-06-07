@@ -4,8 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "version": "node server.js"
   },
   "keywords": [],
@@ -25,8 +24,5 @@
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.14",
     "ws": "^8.21.0"
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
