@@ -20,39 +20,20 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const { data } = await api.post("/auth/login", {
-      email,
-      password,
-    });
-
+    const { data } = await api.post("/auth/login", { email, password });
     localStorage.setItem("af_token", data.token);
     localStorage.setItem("af_user", JSON.stringify(data));
-
     setUser(data);
-
-    router.push(
-      data.role === "admin"
-        ? "/admin/dashboard"
-        : "/employee/dashboard"
-    );
-
+    router.push(data.role === "admin" ? "/admin/dashboard" : "/employee/dashboard");
     return data;
   };
 
   const register = async (formData) => {
     const { data } = await api.post("/auth/register", formData);
-
     localStorage.setItem("af_token", data.token);
     localStorage.setItem("af_user", JSON.stringify(data));
-
     setUser(data);
-
-    router.push(
-      data.role === "admin"
-        ? "/admin/dashboard"
-        : "/employee/dashboard"
-    );
-
+    router.push(data.role === "admin" ? "/admin/dashboard" : "/employee/dashboard");
     return data;
   };
 
@@ -68,4 +49,9 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
+}
+
+// ✅ Added missing export
+export function useAuth() {
+  return useContext(AuthContext);
 }
