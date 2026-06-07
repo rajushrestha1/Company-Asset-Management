@@ -50,17 +50,17 @@ The backend of the Asset Management System is built using Node.js and Express.js
 
 ## API Endpoints
 
-Base URL: http://localhost:3000/api
+- Base URL: http://localhost:3000/api
 ### Auth USER
-http://localhost:3000/api/auth/register
-http://localhost:3000/api/auth/login
+- http://localhost:3000/api/auth/register
+- http://localhost:3000/api/auth/login
 
 ### Assets
-http://localhost:3000/api/assets
-http://localhost:3000/api/assets/:id
-http://localhost:3000/api/assets/assign/:id
-http://localhost:3000/api/assets/return/:id
-http://localhost:3000/api/assets/queue/:id
+- http://localhost:3000/api/assets
+- http://localhost:3000/api/assets/:id
+- http://localhost:3000/api/assets/assign/:id
+- http://localhost:3000/api/assets/return/:id
+- http://localhost:3000/api/assets/queue/:id
 
 
 
