@@ -34,7 +34,6 @@ Next.js (JavaScript) – Framework for building the React-based frontend with ro
 Tailwind CSS – Utility-first CSS framework for creating a modern and responsive UI
 shadcn/ui – Prebuilt accessible UI components for consistent and clean design
 Lucide React – Icon library used for modern and lightweight icons
-Axios – Used for handling API requests between frontend and backend
 date-fns – Utility library for formatting and manipulating dates efficiently
 
 
