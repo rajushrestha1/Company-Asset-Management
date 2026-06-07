@@ -34,33 +34,37 @@ export const authAPI = {
 };
 
 /* ── ASSETS ── */
-// All asset mutations use FormData (Multer on backend)
 export const assetAPI = {
   getAll   : (params) => api.get("/assets", { params }),
   getById  : (id)     => api.get(`/assets/${id}`),
   getStats : ()       => api.get("/assets/stats"),
-  create   : (fd)     => api.post("/assets", fd),           // FormData
-  update   : (id, fd) => api.put(`/assets/${id}`, fd),      // FormData
+  create   : (fd)     => api.post("/assets", fd),
+  update   : (id, fd) => api.put(`/assets/${id}`, fd),
   delete   : (id)     => api.delete(`/assets/${id}`),
 };
 
 /* ── TRANSACTIONS ── */
 export const txnAPI = {
-  assign        : (d)   => api.post("/transactions/assign", d),
-  reserve       : (d)   => api.post("/transactions/reserve", d),
-  cancelReserve : (aid) => api.delete(`/transactions/reserve/${aid}`),
+  assign        : (d)     => api.post("/transactions/assign", d),
+  reserve       : (d)     => api.post("/transactions/reserve", d),
+  cancelReserve : (aid)   => api.delete(`/transactions/reserve/${aid}`),
   returnAsset   : (id, d) => api.put(`/transactions/return/${id}`, d),
-  getAll        : (p)   => api.get("/transactions", { params: p }),
-  getMy         : ()    => api.get("/transactions/my"),
-  getQueue      : (aid) => api.get(`/transactions/queue/${aid}`),
+  getAll        : (p)     => api.get("/transactions", { params: p }),
+  getMy         : ()      => api.get("/transactions/my"),
+  getQueue      : (aid)   => api.get(`/transactions/queue/${aid}`),
 };
 
 /* ── USERS ── */
 export const userAPI = {
-  getAll  : ()       => api.get("/users"),
-  getById : (id)     => api.get(`/users/${id}`),
-  update  : (id, d)  => api.put(`/users/${id}`, d),
-  delete  : (id)     => api.delete(`/users/${id}`),
+  getAll  : ()      => api.get("/users"),
+  getById : (id)    => api.get(`/users/${id}`),
+  update  : (id, d) => api.put(`/users/${id}`, d),
+  delete  : (id)    => api.delete(`/users/${id}`),
 };
+
+// ✅ ADDED — alias so both import names work across all pages
+// admin/dashboard uses txnAPI, other pages use transactionAPI
+// now both work without changing any page files
+export const transactionAPI = txnAPI;
 
 export default api;

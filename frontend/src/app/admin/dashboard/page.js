@@ -34,9 +34,26 @@ function StatCard({ label, value, icon: Icon, iconClassName }) {
 }
 
 function StatusBadge({ children }) {
+  const status = String(children || "").toLowerCase();
+
+  const styles = {
+    active:
+      "border-emerald-500/20 bg-emerald-500/10 text-emerald-300",
+    reserved:
+      "border-amber-500/20 bg-amber-500/10 text-amber-300",
+    returned:
+      "border-slate-500/20 bg-slate-500/10 text-slate-300",
+    cancelled:
+      "border-red-500/20 bg-red-500/10 text-red-300",
+  };
+
   return (
-    <span className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-semibold capitalize text-emerald-300">
-      {children}
+    <span
+      className={`inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-semibold capitalize ${
+        styles[status] || "border-slate-500/20 bg-slate-500/10 text-slate-300"
+      }`}
+    >
+      {children || "—"}
     </span>
   );
 }
@@ -47,12 +64,17 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([assetAPI.getStats(), txnAPI.getAll({ status: "active" })])
-      .then(([statsRes, txnsRes]) => {
-        setStats(statsRes.data);
-        setTxns(txnsRes.data.slice(0, 8));
-      })
-      .finally(() => setLoading(false));
+   Promise.all([assetAPI.getStats(), txnAPI.getAll()])
+  .then(([statsRes, txnsRes]) => {
+    setStats(statsRes.data);
+
+    const visibleTxns = txnsRes.data.filter(
+      (txn) => txn.status === "active" || txn.status === "reserved"
+    );
+
+    setTxns(visibleTxns.slice(0, 8));
+  })
+  .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
@@ -233,7 +255,7 @@ export default function AdminDashboard() {
                       </td>
 
                       <td className="px-5 py-4">
-                        <StatusBadge>Active</StatusBadge>
+                    <StatusBadge>{txn.status}</StatusBadge>
                       </td>
                     </tr>
                   ))}

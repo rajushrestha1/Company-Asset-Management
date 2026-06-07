@@ -4,7 +4,6 @@ const User = require("../models/User");
 
 // ─────────────────────────────────────────
 // ADMIN: Assign asset to an employee
-// @POST /api/transactions/assign
 // ─────────────────────────────────────────
 const assignAsset = async (req, res) => {
   const { assetId, employeeId, expectedReturnDate } = req.body;
@@ -77,7 +76,7 @@ const assignAsset = async (req, res) => {
 
 // ─────────────────────────────────────────
 // EMPLOYEE: Reserve an asset (join queue)
-// @POST /api/transactions/reserve
+
 // ─────────────────────────────────────────
 const reserveAsset = async (req, res) => {
   const { assetId } = req.body;
@@ -117,7 +116,6 @@ const reserveAsset = async (req, res) => {
 
 // ─────────────────────────────────────────
 // EMPLOYEE: Cancel their reservation
-// @DELETE /api/transactions/reserve/:assetId
 // ─────────────────────────────────────────
 const cancelReservation = async (req, res) => {
   const asset = await Asset.findById(req.params.assetId);
@@ -138,7 +136,6 @@ const cancelReservation = async (req, res) => {
 
 // ─────────────────────────────────────────
 // EMPLOYEE: Return an asset with condition rating
-// @PUT /api/transactions/return/:transactionId
 // ─────────────────────────────────────────
 const returnAsset = async (req, res) => {
   const { condition_rating } = req.body;
@@ -199,10 +196,7 @@ const returnAsset = async (req, res) => {
   });
 };
 
-// ─────────────────────────────────────────
-// EMPLOYEE: View my active transactions
-// @GET /api/transactions/my
-// ─────────────────────────────────────────
+
 const getMyTransactions = async (req, res) => {
   const transactions = await Transaction.find({ employee: req.user._id })
     .populate("asset", "item_name category serial_number manufacturer image")
@@ -215,10 +209,7 @@ const getMyTransactions = async (req, res) => {
   res.json({ active, history });
 };
 
-// ─────────────────────────────────────────
-// ADMIN: View all transactions
-// @GET /api/transactions
-// ─────────────────────────────────────────
+
 const getAllTransactions = async (req, res) => {
   const { status, employeeId, assetId } = req.query;
   const filter = {};
@@ -235,10 +226,7 @@ const getAllTransactions = async (req, res) => {
   res.json(transactions);
 };
 
-// ─────────────────────────────────────────
-// ADMIN: View reservation queue for an asset
-// @GET /api/transactions/queue/:assetId
-// ─────────────────────────────────────────
+
 const getReservationQueue = async (req, res) => {
   const asset = await Asset.findById(req.params.assetId).populate(
     "reservationQueue.employee",
