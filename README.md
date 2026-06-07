@@ -70,6 +70,8 @@ The system is designed with a clear separation of concerns between the frontend 
 JWT-based authentication is used to provide secure and stateless access control across the application. The database schema is structured to manage users, assets, and transactions efficiently, with defined relationships that support asset assignment, return tracking, and transaction history.
 The system also includes validation and centralized error handling to maintain data integrity, prevent invalid operations, and provide a smooth user experience.
 
+
+```txt
 ┌──────────────────────────────────────────────┐
 │                  USERS                       │
 │                                              │
@@ -99,16 +101,16 @@ The system also includes validation and centralized error handling to maintain d
 │              Node.js + Express.js            │
 │                                              │
 │   ┌────────────┐   ┌────────────────────┐   │
-│   │    CORS    │   │  JWT Auth Middleware│   │
+│   │    CORS    │   │ JWT Auth Middleware│   │
 │   └────────────┘   └────────────────────┘   │
 │                                              │
 │   ┌────────────┐   ┌────────────┐          │
 │   │ /api/auth  │   │ /api/users │          │
 │   └────────────┘   └────────────┘          │
 │                                              │
-│   ┌────────────┐   ┌────────────────┐      │
-│   │ /api/assets│   │ /api/transactions│     │
-│   └────────────┘   └────────────────┘      │
+│   ┌────────────┐   ┌──────────────────┐    │
+│   │/api/assets │   │/api/transactions │    │
+│   └────────────┘   └──────────────────┘    │
 │                                              │
 │            Controllers / Business Logic      │
 │                     │                        │
@@ -130,6 +132,8 @@ The system also includes validation and centralized error handling to maintain d
 │   │ JWT / DB URL │                          │
 │   └──────────────┘                          │
 └──────────────────────────────────────────────┘
+```
+
 
 ## Backend Setup Instructions
 - cd backend
