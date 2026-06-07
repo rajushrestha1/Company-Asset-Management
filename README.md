@@ -30,23 +30,23 @@ Employees can browse the asset catalog, see which devices are available, join a 
 The frontend of the Asset Management System is built using Next.js (JavaScript) to deliver a fast, responsive, and SEO-friendly user interface. The design focuses on simplicity, usability, and modern UI principles to ensure smooth user experience across all devices.
 
 ### Tools & Technologies Used
-Next.js (JavaScript) – Framework for building the React-based frontend with routing and server-side rendering support
-Tailwind CSS – Utility-first CSS framework for creating a modern and responsive UI
-shadcn/ui – Prebuilt accessible UI components for consistent and clean design
-Lucide React – Icon library used for modern and lightweight icons
-date-fns – Utility library for formatting and manipulating dates efficiently
+- Next.js (JavaScript) – Framework for building the React-based frontend with routing and server-side rendering support
+- Tailwind CSS – Utility-first CSS framework for creating a modern and responsive UI
+- shadcn/ui – Prebuilt accessible UI components for consistent and clean design
+- Lucide React – Icon library used for modern and lightweight icons
+- date-fns – Utility library for formatting and manipulating dates efficiently
 
 
 ## Backend
 The backend of the Asset Management System is built using Node.js and Express.js, providing a robust and scalable RESTful API for managing assets and user operations. It handles authentication, database operations, and business logic, ensuring secure and efficient data flow between the frontend and database.
 ### Tools & Technologies Used
-Node.js – Runtime environment for server-side JavaScript
-Express.js – Web framework for building REST APIs
-MongoDB – NoSQL database for storing users and asset data
-Mongoose – ODM for schema modeling and database interaction
-JWT (JSON Web Token) – For secure authentication and authorization
-Cloudinary – For image/file uploads and management
-bcrypt – For hashing user passwords securely
+- Node.js – Runtime environment for server-side JavaScript
+- Express.js – Web framework for building REST APIs
+- MongoDB – NoSQL database for storing users and asset data
+- Mongoose – ODM for schema modeling and database interaction
+- JWT (JSON Web Token) – For secure authentication and authorization
+- Cloudinary – For image/file uploads and management
+- bcrypt – For hashing user passwords securely
 
 ## API Endpoints
 
